@@ -29,36 +29,6 @@ extern U8 check_rtu_msg(void)
         }
         return 0;
 }
-extern void write_to_list(void)
-{
-    status_list->mem_valid = status_list->eeprom_list[0];               //indicate EEPROM are used and freshed recently 1--> valid
-    status_list->meter_valid = status_list->eeprom_list[1];             //indicate meter is connected                   1--> valid
-    status_list->data_valid = status_list->eeprom_list[2];              //indicate whether data should be freshed  0->note processed 1->processing 2->finish processing
-    //status_list->process_flag = status_list->eeprom_list[3];            //show the step of  data freshing from the meter
-    //status_list->err_eeprom = status_list->eeprom_list[4];              //fail to store data to EEPROM
-    //status_list->err_connect = status_list->eeprom_list[5];             //fail connect to the meter
-    status_list->err_type = status_list->eeprom_list[4];
-    //status_list->err_flag = status_list->eeprom_list[7];
-    if(!status_list->data_valid)
-    {
-        status_list->start_exchange = 1;
-    }
-    //status_list->start_exchange = status_list->eeprom_list[8];
-    status_list-> meter_address = status_list->eeprom_list[3];
-}
-extern void list_to_eeprom(void)
-{
-    status_list->eeprom_list[0] = status_list->mem_valid;
-    status_list->eeprom_list[1] = status_list->meter_valid;
-    status_list->eeprom_list[2] = status_list->data_valid;
-    status_list->eeprom_list[3] = status_list-> meter_address;
-    status_list->eeprom_list[4] = status_list->err_type;
-//    status_list->eeprom_list[5] =
-//    status_list->eeprom_list[6] =
-//    status_list->eeprom_list[7] =
-//    status_list->eeprom_list[8] =
-//    status_list->eeprom_list[9] = status_list-> meter_address;
-}
 extern void refresh_list(void)
 {
         status_list->data_valid = 1;

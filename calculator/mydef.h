@@ -33,9 +33,7 @@
 
 typedef struct clock_struct {
         U16 count_ms;      //base time
-         U16 count_sec;
         U16 count_min;      //scan cycle
-
         U8  reset_flag;
 } CLOCK_STRUCT,*CLOCK_HAND;
 

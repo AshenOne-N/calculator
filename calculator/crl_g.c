@@ -14,7 +14,7 @@
 #include "hal.h"
 #include "at24c02.h"
 extern void send_msg(void)
-{		feed_dog();
+{
         uart2_buf[0] = 0x2a;
         uart2_buf[1] = 0X41;
         uart2_buf[2] = 0x4a;
@@ -22,7 +22,6 @@ extern void send_msg(void)
         UART2_RW_FLAG = RS485_WRITE;
         //UART2_RW_FLAG = RS485_READ;
         //LED4 = !LED4;
-		feed_dog();
         uart2_send_string();
 }
 extern unsigned char lrccheck(unsigned char *lrcbuf,unsigned char stnum,unsigned char lrclength)
@@ -90,30 +89,19 @@ extern void refresh_mem(void)
 }
 extern void write_back_eeprom(void)
 {
-feed_dog();
         while(RW24XX(&crl_g_meter.union_data.data_array[0],8,0x20,WRITE_EEPROM));
-		feed_dog();
 		while(RW24XX(&crl_g_meter.union_data.data_array[8],8,0x28,WRITE_EEPROM));
-		feed_dog();
 		while(RW24XX(&crl_g_meter.union_data.data_array[16],8,0x30,WRITE_EEPROM));
-		feed_dog();
 		while(RW24XX(&crl_g_meter.union_data.data_array[24],8,0x38,WRITE_EEPROM));
-		feed_dog();
 }
 
 extern void no_reply_err(void)
 {
-        if(1 > status_list->err_connect)
+        if(5 > status_list->err_connect)
                 ++status_list->err_connect;
         else
-                {
-                    status_list->mem_valid = 0;
-                    status_list->meter_valid = 0;
-                    status_list->data_valid = 0;
-                    status_list->err_connect = 0;
+                status_list->meter_valid = 0;
         status_list->err_type |= 0x01;
-        status_list->start_exchange =0;
-                }
 }
 extern void reset_uart2(void)
 {

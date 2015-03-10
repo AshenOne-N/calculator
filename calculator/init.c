@@ -64,7 +64,7 @@ extern void init_system(void)
         init_timer0();
        // init_uart2();
         EA =1;
-        wdtinit();
+        //wdtinit();
         start_timer0();
 }
 

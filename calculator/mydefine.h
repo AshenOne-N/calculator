@@ -11,7 +11,7 @@
 * \version V
 * \date
 *************************************************************************/
-xdata CLOCK_STRUCT local_clock={0,0,0,0};
+xdata CLOCK_STRUCT local_clock={0,0};
 xdata CLOCK_HAND clock_hand = &local_clock;
 
 xdata METER crl_g_meter = {0,0,0,0,0,0,0};
