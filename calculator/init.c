@@ -26,16 +26,11 @@ void init_uart1(void)
 }
 void init_uart2(void)
 {
-        //S2CON = 0x50;
         S2CON = 0x50;
         //BRT=256-(11059200/32/12/baudrate);
-        //BRT=256-(11059200/32/12/2400);
-        BRT = 0XF4;
-        AUXR &= 0XF0;
         AUXR |= 0x10;
-        //AUXR = 0X10;
-        //BRT = 0XF4;   //2400
-        //BRT = 0Xfd;
+        BRT = 0XF4;   //2400
+        BRT = 0Xfd;
         IE2 |= 0x01;
 }
 void init_timer0(void)
@@ -62,9 +57,8 @@ extern void init_system(void)
         init_uart1();
         init_uart2();
         init_timer0();
-       // init_uart2();
         EA =1;
-        wdtinit();
+        //wdtinit();
         start_timer0();
 }
 
