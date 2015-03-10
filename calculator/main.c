@@ -21,6 +21,7 @@
 void main (void)
 {
         init_system();
+        twinkle_leds();
         load_memory();
         //LED1 = 0;
         //LED2 =1;

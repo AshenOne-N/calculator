@@ -20,18 +20,27 @@ void timer0_isr(void) interrupt 1 {
         TF0 = 0;
         //LED4 = 0;
         //while(1);
-        //LED3 = !LED3;
-        if(20 >= clock_hand->count_ms)
+
+        if(14 >= clock_hand->count_ms)
+        {
                 ++(clock_hand->count_ms);
-        else
+        } else
         {
                 clock_hand->count_ms = 0;
-                ++(clock_hand->count_min);
+                ++(clock_hand->count_sec);
+//                status_list->start_exchange = 1;
+                // LED3 = !LED3;
+        }
+        if(60 <= clock_hand->count_sec)
+        {
                 status_list->start_exchange = 1;
-                //LED2 = 0;
+                //clock_hand->reset_flag = 1;
+                ++(clock_hand->count_min);
+                clock_hand->count_sec = 0;
         }
         if(60 <= clock_hand->count_min)
         {
+                //status_list->start_exchange = 1;
                 clock_hand->reset_flag = 1;
                 clock_hand->count_min = 0;
         }
@@ -72,12 +81,12 @@ void uart1_isr(void) interrupt 4 {
                                 uart1->counter = 0;
                                 uart1->err_flag = 0;
                         }
-                       // ACC = SBUF;
-                       // TEMPFLAG1 = PCC;
+                        // ACC = SBUF;
+                        // TEMPFLAG1 = PCC;
                         //TEMPFLAG2 = TB8;
                         //if(TEMPFLAG1 == TB8) {
-                       if(1){
-                                //LED4 =0;
+                        if(1) {
+                                LED1 = !LED1;
                                 uart1->receive_stamp = 0;
                                 if(uart1->counter <= MAX_UART1_BUF_SIZE) {
                                         //LED1 =0;
@@ -95,30 +104,34 @@ void uart1_isr(void) interrupt 4 {
         } else
         {
                 TI = 0;
+                LED2 =!LED2;
                 if(uart1->counter < uart1->length)
                 {
                         ACC = uart1_buf[uart1->counter];
                         TB8 = PCC;
                         SBUF = uart1_buf[uart1->counter++];
                 } else
+                {
                         UART1_RW_FLAG =  RS485_READ;
+                        LED2 = 1;
+                }
+
 
         }
-		//EA=1;
+        //EA=1;
 }
 void uart2_isr(void) interrupt 8 {
-    //TEMPFLAG1 = S2CON;
-   // LED1 = !LED1;
+        //TEMPFLAG1 = S2CON;
+        // LED1 = !LED1;
         if(S2CON & 0x01)
         {
-          LED1 = !LED1;
                 S2CON &= ~0X01;
                 if(2 != uart2->receive_status) {
                         if(0 == uart2->receive_status) {
                                 uart2->receive_status = 1;
                                 uart2->counter = 0;
-                                LED2 =!LED2;
                         }
+                        LED3 = !LED3;
                         uart2->receive_stamp = 0;
                         if(uart2->counter <= MAX_UART2_BUF_SIZE)
                                 uart2_buf[uart2->counter++] = S2BUF;
@@ -129,16 +142,17 @@ void uart2_isr(void) interrupt 8 {
                 }
         } else
         {
-            //LED3 = 0;
+                //LED3 = 0;
                 S2CON &= ~0x02;
+                LED4 = !LED4;
                 if(uart2->counter < uart2->length)
                 {
                         S2BUF = uart2_buf[uart2->counter++];
                 } else
                 {
-                    LED2 =!LED2;
-                    UART2_RW_FLAG = RS485_READ;
+                        LED4 = 1;
+                        UART2_RW_FLAG = RS485_READ;
                 }
-                        //UART2_RW_FLAG = RS485_READ;
+                //UART2_RW_FLAG = RS485_READ;
         }
 }

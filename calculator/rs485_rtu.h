@@ -18,4 +18,6 @@ extern void reset_rs485_struct(void);
 extern U8 get_start_addr(U8 addr);
 extern void instruction_resolve(void);
 extern void instruction_excute(void);
+extern void write_to_list(void);
+extern void list_to_eeprom(void);
 #endif // RS485_RTU_H_INCLUDED
