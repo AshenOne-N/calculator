@@ -74,3 +74,15 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# ====================
+# keil project files
+*.LST
+*.OBJ
+*.M51
+*.bak
+*.uvopt
+*.uvproj
+*.plg
+*.lnp
+*
