@@ -22,8 +22,8 @@ sbit SDA=P0^1;
 sbit SCL=P0^0;
 
 sbit PCC=PSW^0;
-sbit UART1_RW_FLAG=P0^2;
-sbit UART2_RW_FLAG=P0^3;
+sbit UART1_RW_FLAG=P0^3;
+sbit UART2_RW_FLAG=P0^2;
 
 #define READ  1;
 #define WRITE 0;

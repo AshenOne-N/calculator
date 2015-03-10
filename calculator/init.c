@@ -26,16 +26,11 @@ void init_uart1(void)
 }
 void init_uart2(void)
 {
-        //S2CON = 0x50;
         S2CON = 0x50;
         //BRT=256-(11059200/32/12/baudrate);
-        //BRT=256-(11059200/32/12/2400);
-        BRT = 0XF4;
-        AUXR &= 0XF0;
         AUXR |= 0x10;
-        //AUXR = 0X10;
-        //BRT = 0XF4;   //2400
-        //BRT = 0Xfd;
+        BRT = 0XF4;   //2400
+        BRT = 0Xfd;
         IE2 |= 0x01;
 }
 void init_timer0(void)
@@ -46,7 +41,6 @@ void init_timer0(void)
         TL0 = 0x00;		    //设置定时初值
         TH0 = 0xDC;		    //设置定时初值 10ms
         TF0 = 0;		    //清除TF0标志
-        ET0 = 1;
         TR0 = 0;		    //定时器0开始计时
 }
 
@@ -56,14 +50,12 @@ void wdtinit(void)
 }
 extern void init_system(void)
 {
-
+        EA =1;
         UART1_RW_FLAG = 0;
         UART2_RW_FLAG = 0;
         init_uart1();
         init_uart2();
         init_timer0();
-       // init_uart2();
-        EA =1;
         wdtinit();
         start_timer0();
 }

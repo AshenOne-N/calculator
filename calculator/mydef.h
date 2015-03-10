@@ -23,26 +23,16 @@
 #define RECEIVE_PROCESS  1
 #define RECEIVE_FINISHED 2
 
-#define CALIBER_BIG      1
-
-#ifndef CALIBER_BIG
-#define CALIBER     10
-#else
-#define CALIBER    1000
-#endif // CALIBER_BIG
-
 typedef struct clock_struct {
         U16 count_ms;      //base time
-         U16 count_sec;
         U16 count_min;      //scan cycle
-
         U8  reset_flag;
 } CLOCK_STRUCT,*CLOCK_HAND;
 
 typedef struct meter_node {
         union {
-                E32 edata[8];         // all data got from meter
-                U8 data_array[32];
+                E32 edata[7];         // all data got from meter
+                U8 data_array[28];
         } union_data;
 } METER,*NODE;
 
@@ -99,8 +89,5 @@ extern xdata U8 uart2_buf[MAX_UART2_BUF_SIZE];
 
 extern xdata RS485_RTU rs_node;
 extern xdata RS485 rs485;
-
-//extern U8 TEMPFLAG1;
-//extern U8 TEMPFLAG2;
 
 #endif // MYDEF_H_INCLUDED

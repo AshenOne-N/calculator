@@ -21,13 +21,7 @@
 void main (void)
 {
         init_system();
-        twinkle_leds();
         load_memory();
-        //LED1 = 0;
-        //LED2 =1;
-        //while (!TF0)
-        //LED3 = 0;
-        while(scan_status());
+        while(!scan_status());
         reset_system();
 }
-

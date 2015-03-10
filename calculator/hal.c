@@ -31,9 +31,8 @@ extern void feed_dog(void)
 extern void uart1_send_string(void)
 {
         uart1->counter = 1;
-        UART1_RW_FLAG = RS485_WRITE;
         ACC = uart1_buf[0];
-        TB8 = PCC;
+        TB8 = P;
         SBUF = uart1_buf[0];
         //uart1->cursor_msg = &uart1_buf[0];
         // SBUF =*uart1->cursor_msg++;

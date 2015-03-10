@@ -11,7 +11,6 @@
 * \version V
 * \date
 *************************************************************************/
-extern void twinkle_leds(void);
 extern U8 load_memory(void);
 extern U8 scan_status (void);
 #endif // CONTROL_H_INCLUDED
