@@ -27,8 +27,8 @@ xdata UART_POSITION uart2 = &uart2_struct;
 xdata U8 uart1_buf[MAX_UART1_BUF_SIZE] = {0};
 xdata U8 uart2_buf[MAX_UART2_BUF_SIZE] = {0};
 
-xdata RS485_RTU rs_node = {0};
-xdata RS485 rs485 = &rs_node;
+//xdata RS485_RTU rs_node = {0};
+//xdata RS485 rs485 = &rs_node;
 
 //U8 TEMPFLAG1 =0;
 //U8 TEMPFLAG2 =0;

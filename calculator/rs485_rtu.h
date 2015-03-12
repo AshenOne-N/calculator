@@ -12,7 +12,18 @@
 * \date
 *************************************************************************/
 #define NODE_ADDR    0x10
-extern U8 check_rtu_msg(void);
+
+typedef struct rtu_struct {
+        U8 functype;
+        U8 start_addr;
+        U8 length;
+        U8 err_flag;
+        U8 err_type;
+} RS485_RTU,*RS485;
+
+extern xdata RS485_RTU rs_node;
+extern xdata RS485 rs485;
+//extern U8 check_rtu_msg(void);
 extern void refresh_list(void);
 extern void reset_rs485_struct(void);
 extern U8 get_start_addr(U8 addr);
